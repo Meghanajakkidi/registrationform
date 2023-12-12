@@ -1,0 +1,17 @@
+#head-section{
+    background-color:lightblue;
+    text-align: center;
+    padding: 10px;
+}
+#login-section,#register-section{
+    height: 50vh;
+    padding:20px;
+    background-color:lemonchiffon;
+    border: 2px dotted;
+}
+#login-btn,#signup-btn{
+    width:80px;
+    height:40px;
+    padding: 5px;
+    background-color: coral;
+}

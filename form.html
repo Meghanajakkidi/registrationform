@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>REGiSTRATION FORM</title>
+    </head>
+    <link rel="stylesheet" href="style.css">
+    <body>
+        <header id="head-section">
+            <h1>STUDENT REGISTRATION FORM</h1>
+        </header>
+            <div id="login-section">
+                <h1>login</h1>
+                <form>
+                    <label>Email</label>
+                    <input type="text" value="" placeholder="enter your email" id="l-email"/><br><br>
+                    <label>password</label>
+                    <input type="password" value="" placeholder="enter your password" id="l-password"/><br><br>
+                    <button id="login-btn" onclick="login(event)">Login</button>
+                    <p>Don't have account please <a href="#" onclick="goToSignup()">register</a> here</p>
+                </form>
+            </div>
+            <div id="register-section">
+                <h1>REGISTER HERE</h1>
+                <form>
+                    <label>FIRST NAME:</label>
+                    <input type="text" value="" placeholder="first name"id="s-firstname"width="50px" required><br><br>
+                    <label>LAST NAME:</label>
+                    <input type="text" value="" placeholder="last name" id="s-lastname" required><br><br>
+                    <label>Email</label>
+                    <input type="text" value="" placeholder="enter your email" id="s-email" required><br><br>
+                    <label>CONTACT NO:</label>
+                    <input type="number" value="" placeholder="enter your number"id="s-contactno" required><br><br>
+                    <label>SELECT YOUR COURSE</label>
+                    <select id="s-select">
+                        <option value="">MERN</option>
+                        <option value="">HTML</option>
+                        <option value="">CSS</option>
+                    </select><br><br>
+                    <button id="signup-btn" onclick="signup(event)">SUMBIT</button>
+                    <p>Alredy an account please <a href="#" onclick="goToLogin()">Login</a> here</p>
+                </form>
+            </div>
+            
+        <script>
+            let registerDiv = document.getElementById("register-section")
+            let loginDiv = document.getElementById("login-section")
+            loginDiv.style.display="none"
+
+            function goToSignup(){
+                registerDiv.style.display="block"
+                loginDiv.style.display="none"
+                
+            }
+
+            function goToLogin(){
+                loginDiv.style.display="block"
+                registerDiv.style.display="none"
+                
+            }
+
+            async function signup(e){
+                e.preventDefault();
+                let email = document.getElementById("s-email").value;
+                let firstname=document.getElementById("s-firstname").value;
+                let lastname=document.getElementById("s-lastname").value;
+                let contactno=document.getElementById("s-contactno").value;
+                let select=document.getElementById("s-select").value;
+                console.log(email,firstname,lastname,contactno,select)
+                await localStorage.setItem(email,firstname,lastname,contactno,select)
+                goToLogin();
+
+            }
+
+            async function login(event){
+                event.preventDefault()
+                let email = document.getElementById("l-email").value
+                let password=document.getElementById("l-password").value
+                let user = await localStorage.getItem(email)
+                if(!user){
+                    alert("user not found")
+                }else{
+                    if(user===password){
+                        alert("login success")
+                        localStorage.setItem("loggedInUser",email)
+                        goToDashboard(email)
+                    }else{
+                        alert("invalid credentials")
+                    }
+                }
+            }
+
+           
+
+
+        </script>
+    </body>
+</html>
